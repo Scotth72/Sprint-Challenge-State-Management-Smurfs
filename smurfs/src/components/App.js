@@ -1,18 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
+import { SmurfList } from "./smurfList";
+import { connect} from 'react-redux';
+import { addNewSmurf} from './Actions/actions';
 
 
 
 
-const App = props => {
+const App = (props) => {
     return (
       <div className="App">
         <h1>SMURFS! 2.0 W/ Redux</h1>
 
-        <div>Welcome to your state management version of Smurfs!</div>
+        {props.isFetching ? (
+          <SmurfList smurfs={props.smurfs} addNewSmurf={props.addNewSmurf} />):
+          (<button type='button'
+          onClick={() => props.getData()}>Hello New Smurf</button>
+          )
+        }
       </div>
     );
-  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    smurfs: state.smurfs,
+    isFetching: state.isFetching
+  }
+}
+export default connect (mapStateToProps,{}) (App);
