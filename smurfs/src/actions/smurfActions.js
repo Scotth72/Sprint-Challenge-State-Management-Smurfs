@@ -12,7 +12,7 @@ export const getSmurfData = () => (dispatch) => {
   axios
     .get("http://localhost:3333/smurfs")
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       dispatch({ type: FETCH_SMURFS_SUCCESS, payload: response.data });
     })
     .catch((err) => {
@@ -20,14 +20,14 @@ export const getSmurfData = () => (dispatch) => {
     });
 };
 
-export const handleNewSmurf = (smurf) => (dispatch) => {
-  axios
-    .post("http://localhost:3333/smurfs", smurf)
-    .then((res) => {
-      console.log("from the success api", res);
-      dispatch({ type: POST_SMURFS_SUCCESS, payload: res.data });
-    })
-    .catch((err) => {
-      dispatch({ type: POST_SMURFS_FAIL, payload: err.response });
-    });
-};
+// export const handleNewSmurf = (smurf) => (dispatch) => {
+//   axios
+//     .post("http://localhost:3333/smurfs", smurf)
+//     .then((res) => {
+//       console.log("from the success api", res);
+//       dispatch({ type: POST_SMURFS_SUCCESS, payload: res.data });
+//     })
+//     .catch((err) => {
+//       dispatch({ type: POST_SMURFS_FAIL, payload: err.response });
+//     });
+// };

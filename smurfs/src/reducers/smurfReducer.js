@@ -36,8 +36,8 @@ const reducer = (state = initialState, action) => {
     case POST_SMURFS_SUCCESS:
       const newSmurfs = {
         name: action.payload,
-        age: "",
-        height: "",
+        age: action.payload,
+        height: action.payload,
         id: Date.now(),
       };
       return { ...state, smurfs: [{ ...state.smurfs, newSmurfs }] };

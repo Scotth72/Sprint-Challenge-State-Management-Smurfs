@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { getSmurfData, handleNewSmurf } from "../actions";
+import { getSmurfData } from "../actions";
 import { connect } from "react-redux";
+import axios from "axios";
 
 const SmurfForm = (props) => {
+  //   console.log(props, "this is a smurf props");
   const [newSmurf, setnewSmurf] = useState({
     name: "",
     age: "",
@@ -21,7 +23,14 @@ const SmurfForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleNewSmurf(newSmurf);
+    axios
+      .post("http://localhost:3333/smurfs", newSmurf)
+      .then((res) => {
+        getSmurfData();
+      })
+      .catch((err) => {
+        // console.log(err.response, "why error ,why");
+      });
   };
 
   return (
@@ -49,14 +58,12 @@ const SmurfForm = (props) => {
       />
 
       <label>
-        <button onClick={() => props.handleNewSmurf(newSmurf)}>
-          View Smurf from the Village
-        </button>
+        <button type="submit">View Smurf from the Village</button>
       </label>
 
       <div>
         {props.smurfs.map((smurf) => {
-          console.log(smurf);
+          console.log(smurf, "testing");
           return (
             <>
               <h2>Name: {smurf.name}</h2>
@@ -72,8 +79,7 @@ const SmurfForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     smurfs: state.smurfs,
+    addingSmurf: state.addingSmurf,
   };
 };
-export default connect(mapStateToProps, { getSmurfData, handleNewSmurf })(
-  SmurfForm
-);
+export default connect(mapStateToProps, { getSmurfData })(SmurfForm);
