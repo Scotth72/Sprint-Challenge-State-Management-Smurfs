@@ -61,7 +61,7 @@ const SmurfForm = (props) => {
         <button type="submit">View Smurf from the Village</button>
       </label>
 
-      <div>
+      {/* <div>
         {props.smurfs.map((smurf) => {
           console.log(smurf, "testing");
           return (
@@ -72,7 +72,7 @@ const SmurfForm = (props) => {
             </>
           );
         })}
-      </div>
+      </div> */}
     </form>
   );
 };

@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
         height: action.payload,
         id: Date.now(),
       };
-      return { ...state, smurfs: [{ ...state.smurfs, newSmurfs }] };
+      return { ...state, smurfs: action.payload };
     case POST_SMURFS_FAIL:
       return {
         ...state,
