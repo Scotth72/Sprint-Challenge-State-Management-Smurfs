@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { getSmurfData } from "../actions";
+import React, { useState, useEffect } from "react";
+import { getSmurfData, handleNewSmurf } from "../actions/smurfActions";
 import { connect } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 
 const SmurfForm = (props) => {
   //   console.log(props, "this is a smurf props");
+
   const [newSmurf, setnewSmurf] = useState({
     name: "",
     age: "",
@@ -23,14 +24,7 @@ const SmurfForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3333/smurfs", newSmurf)
-      .then((res) => {
-        getSmurfData();
-      })
-      .catch((err) => {
-        // console.log(err.response, "why error ,why");
-      });
+    props.getSmurfData();
   };
 
   return (
@@ -41,38 +35,29 @@ const SmurfForm = (props) => {
         name="name"
         type="text"
         value={newSmurf.name}
-      />
+      />{" "}
+      <br />
       <label htmlFor="age"> Age</label>
       <input
         onChange={handleChanges}
         name="age"
         type="number"
-        value={newSmurf.number}
-      />
+        value={newSmurf.age}
+      />{" "}
+      <br />
       <label htmlFor="height"> Height</label>
       <input
         onChange={handleChanges}
         name="height"
         type="text"
         value={newSmurf.height}
-      />
-
+      />{" "}
+      <br />
       <label>
-        <button type="submit">View Smurf from the Village</button>
+        <button type="submit" onClick={() => props.handleNewSmurf(newSmurf)}>
+          View Smurf from the Village
+        </button>
       </label>
-
-      {/* <div>
-        {props.smurfs.map((smurf) => {
-          console.log(smurf, "testing");
-          return (
-            <>
-              <h2>Name: {smurf.name}</h2>
-              <h2>Age: {smurf.age}</h2>
-              <h2>Height: {smurf.height}</h2>
-            </>
-          );
-        })}
-      </div> */}
     </form>
   );
 };
@@ -82,4 +67,6 @@ const mapStateToProps = (state) => {
     addingSmurf: state.addingSmurf,
   };
 };
-export default connect(mapStateToProps, { getSmurfData })(SmurfForm);
+export default connect(mapStateToProps, { getSmurfData, handleNewSmurf })(
+  SmurfForm
+);

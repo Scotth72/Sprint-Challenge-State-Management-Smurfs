@@ -6,14 +6,13 @@ import { connect } from "react-redux";
 import { getSmurfData } from "../actions";
 
 const App = (props) => {
-  useEffect(() => {
-    props.getSmurfData();
-  }, []);
   return (
     <div className="App">
       <h1>SMURF Redux SIGN UP</h1>
       <SmurfForm />
-      {props.smurfs.map((smurf) => smurf && <SmurfCard smurf={smurf} />)}
+      {props.smurfs.map((smurf) => {
+        return <SmurfCard smurf={smurf} key={smurf.id} />;
+      })}
     </div>
   );
 };

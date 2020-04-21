@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { getSmurfData } from "../actions";
 
 const SmurfCard = (props) => {
   console.log({ props }, "props from smurfcard");
@@ -13,10 +11,4 @@ const SmurfCard = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    smurfs: state.smurfs,
-    addingSmurf: state.addingSmurf,
-  };
-};
-export default connect(mapStateToProps, { getSmurfData })(SmurfCard);
+export default SmurfCard;
